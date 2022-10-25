@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  tp01:
+    build: .
+    entrypoint: .docker/entrypoint.sh
+    container_name: tp01
+    ports:
+      - "1234:1234"
+    volumes:
+      - .:/app/node/app
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
