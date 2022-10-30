@@ -1,9 +1,9 @@
 # WebServices-Uni
 
-## Trabalhos praticos e trabalhos da Disciplina
+## Trabalhos práticos e trabalhos da Disciplina
 
  
-| Exercicios | Decrição                       |
+| Exercícios | Descrição                       |
 | ---------- | ------------------------------ |
-| A04        | Implementação de um WebService |
+| TP01        | Implementação de um WebService |
 
