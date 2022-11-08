@@ -8,7 +8,7 @@ const dbConn = new Sequelize(db_config)
 const connect = async () => {
   try {
     await dbConn.authenticate();
-    console.log("Connection has been stabblished sucessfully")
+    console.log("Connection has been stabilized sucessfully")
   } catch (error) {
     console.error('Unable to connect to the database:',error);
   }
