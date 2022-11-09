@@ -79,4 +79,31 @@ entity Sumario {
   estado
 }
 
+entity User {
+  codigo
+  password
+}
+
+
+entity DisciplinaCurso{
+  * codigo: integer
+  * sigla: string
+  * ano: Date
+  * semenstre
+
+}
+
+
+User ||--|| Docente
+Docente }o--o{ DiscplinaDocente
+EdicaoDisciplina ||--o{ DiscplinaDocente
+Aula }o--o{ DiscplinaDocente
+
+Horario }o--|| Aula
+
+Curso }|--o{ DisciplinaCurso
+Disciplina }|--|{ DisciplinaCurso
+
+EdicaoDisciplina }|--|| DisciplinaCurso
+
 @enduml
