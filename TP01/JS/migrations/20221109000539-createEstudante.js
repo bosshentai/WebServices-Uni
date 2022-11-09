@@ -10,11 +10,11 @@ module.exports = {
         primaryKey: true,
       },
       nome: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING(45),
         allowNull: false,
       },
       nome_completo: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING(80),
       },
     })
     /**

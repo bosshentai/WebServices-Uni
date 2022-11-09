@@ -7,7 +7,7 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('grupo_disciplinar', {
       nome:{
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(45),
         allowNull: false
       }
     })

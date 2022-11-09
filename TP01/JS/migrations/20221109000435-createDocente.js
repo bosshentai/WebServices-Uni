@@ -5,24 +5,24 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('docente', {
       sigla: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING(6),
         allowNull: false,
       },
       nome: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING(45),
         allowNull: false,
       },
       nome_completo: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING(80),
       },
       ocupacao: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING(45),
       },
       grau: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING(45),
       },
       tipo_contrato: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING(45),
       },
     })
     /**

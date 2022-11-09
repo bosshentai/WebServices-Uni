@@ -13,7 +13,7 @@ module.exports = {
         allowNull: false,
       },
       funcao: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING(45),
       },
     })
     /**

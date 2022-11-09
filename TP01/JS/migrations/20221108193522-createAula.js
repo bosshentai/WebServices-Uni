@@ -11,20 +11,15 @@ module.exports = {
         primaryKey: true,
       },
       dia_semana: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING(45),
         allowNull: false,
-        // validate:{
-        //   maxLength: val =>{
-        //     if(val.length)
-        //   }
-        // }
       },
       hora: {
         type: Sequelize.DataTypes.DATE,
         // allowNull: false,
       },
       local: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING(45),
         // allowNull: false,
       },
       duracao: {
@@ -35,7 +30,7 @@ module.exports = {
         type: Sequelize.DataTypes.DATE,
       },
       tipo:{
-        type:Sequelize.DataTypes.STRING
+        type:Sequelize.DataTypes.STRING(45)
       },
       id_horario:{
         type: Sequelize.DataTypes.INTEGER,

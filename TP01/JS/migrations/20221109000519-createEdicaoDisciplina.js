@@ -5,20 +5,20 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('edicao_disciplina', {
       edicao:{
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING(45),
         allowNull: false,
 
       },
       estado:{
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING(45),
 
       },
       ano_lectivo:{
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING(45),
         allowNull: false,
       },
       periodo:{
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING(45),
         allowNull: false,
       }
     })

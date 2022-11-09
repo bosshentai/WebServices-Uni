@@ -7,17 +7,17 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('curso', {
       sigla:{
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(12),
         allowNull: false,
         // autoIncrement: true,
         // primaryKey: true,
       },
       nome:{
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(45),
         allowNull: false,
       },
       conferegrau:{
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(45),
         allowNull: false
       }
     })

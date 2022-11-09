@@ -9,11 +9,14 @@ module.exports = {
         allowNull: false,
       },
       biblio: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING(45),
       },
       presenca: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.INTEGER,
       },
+      estado:{
+        type: Sequelize.DataTypes.STRING(45)
+      }
     })
     /**
      * Add altering commands here.

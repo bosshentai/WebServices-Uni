@@ -11,23 +11,26 @@ module.exports = {
         allowNull: false,
       },
       disciplina: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.INTEGER,
         allowNull: false,
+      },
+      dia_semana:{
+        type: Sequelize.DataTypes.STRING(45)
       },
       hora: {
         type: Sequelize.DataTypes.DATE,
       },
       local: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING(45),
       },
       duracao: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING(45),
       },
       tipo: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING(45),
       },
       semestre: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.INTEGER,
       },
     })
     /**
