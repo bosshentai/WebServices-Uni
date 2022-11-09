@@ -1,0 +1,82 @@
+@startuml webserver
+
+
+entity Aula {
+
+  * numero : integer
+  * dia_semana : string
+  * hora : Date
+  * local: string
+  * duracao : string
+  * data : type
+  * tipo: string
+  * id_horario
+}
+
+
+entity Curso{
+  * sigla : string
+  --
+  * nome : string
+  * conferegrau: string
+
+}
+
+entity Disciplina {
+  * codigo: string <<unique>>
+  --
+  * nome: string
+   sinopse: string
+}
+
+entity Docente {
+  * sigla: string
+   nome_completo: string
+   ocupacao: string
+   grau: string
+   tipo_contrato: string
+}
+
+entity DiscplinaDocente <<Dsd>>{
+  * id_docente: integer
+  * id_disciplina: integer
+   funcao: string
+}
+
+
+entity EdicaoDisciplina {
+  * edicao: string
+  estado: string
+  * ano_lectivo: string
+  * periodo: strinfg
+}
+
+entity Estudante {
+  * codigo: string
+  * nome: string
+  nome_completo: string
+}
+
+entity GrupoDisciplinar{
+  nome: string
+}
+
+entity Horario {
+  * id_docente: string <<FK>>
+  * disciplina : integer <<FK>>
+  dia_semana: string
+  hora: Date
+  local: string
+  duracao: string
+  semestre: string
+
+}
+
+entity Sumario {
+  * conteudo
+  biblio
+  presenca
+  estado
+}
+
+@enduml

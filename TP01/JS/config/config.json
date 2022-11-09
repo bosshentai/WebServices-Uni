@@ -4,6 +4,7 @@
     "password": "postgres",
     "database": "tp01",
     "host": "localhost",
+    "port": "12345",
     "dialect": "postgres",
     "define":{
       "timestamps":false,
