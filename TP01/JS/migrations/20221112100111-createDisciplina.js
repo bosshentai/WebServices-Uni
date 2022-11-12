@@ -3,17 +3,25 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('dsd', {
-      id_docente: {
-        type: Sequelize.DataTypes.INTEGER,
+    await queryInterface.createTable('disciplina', {
+      id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
       },
-      id_disciplina: {
-        type: Sequelize.DataTypes.INTEGER,
+      codigo: {
+        type: Sequelize.STRING(6),
         allowNull: false,
+        unique: true,
       },
-      funcao: {
-        type: Sequelize.DataTypes.STRING(45),
+      nome: {
+        type: Sequelize.STRING(100),
+        defaultValue: null,
+      },
+      sinopse: {
+        type: Sequelize.STRING(120),
+        defaultValue: null,
       },
     })
     /**
@@ -25,7 +33,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('dsd')
+    await queryInterface.dropTable('disciplina')
     /**
      * Add reverting commands here.
      *

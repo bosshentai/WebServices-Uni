@@ -3,26 +3,30 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('docente', {
-      sigla: {
-        type: Sequelize.DataTypes.STRING(6),
+    await queryInterface.createTable('user', {
+      id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        autoIncrement: false,
+        primaryKey: true,
       },
       nome: {
-        type: Sequelize.DataTypes.STRING(45),
+        type: Sequelize.STRING(45),
+        allowNull: false,
+        unique: true,
+      },
+      email: {
+        type: Sequelize.STRING(45),
+        allowNull: false,
+        unique: true,
+      },
+      password: {
+        type: Sequelize.STRING(120),
         allowNull: false,
       },
-      nome_completo: {
-        type: Sequelize.DataTypes.STRING(80),
-      },
-      ocupacao: {
-        type: Sequelize.DataTypes.STRING(45),
-      },
-      grau: {
-        type: Sequelize.DataTypes.STRING(45),
-      },
-      tipo_contrato: {
-        type: Sequelize.DataTypes.STRING(45),
+      categoria: {
+        type: Sequelize.STRING(45),
+        defaultValue: null,
       },
     })
     /**
@@ -34,7 +38,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('docente');
+    await queryInterface.dropTable('user')
     /**
      * Add reverting commands here.
      *

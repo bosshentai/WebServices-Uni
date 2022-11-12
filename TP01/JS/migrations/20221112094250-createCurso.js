@@ -3,22 +3,23 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('edicao_disciplina', {
-      edicao:{
-        type: Sequelize.DataTypes.STRING(45),
-        allowNull: false,
-
+    await queryInterface.createTable('curso',{
+      id:{
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        autoIncrement: true,
+        primaryKey: true,
       },
-      estado:{
-        type: Sequelize.DataTypes.STRING(45),
-
-      },
-      ano_lectivo:{
-        type: Sequelize.DataTypes.STRING(45),
+      sigla:{
+        type: Sequelize.STRING(12),
         allowNull: false,
       },
-      periodo:{
-        type: Sequelize.DataTypes.STRING(45),
+      nome:{
+        type: Sequelize.STRING(45),
+        allowNull: false,
+      },
+      conferegrau:{
+        type: Sequelize.STRING(45),
         allowNull: false,
       }
     })
@@ -31,7 +32,7 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('edicao_disciplina')
+    await queryInterface.dropTable('curso')
     /**
      * Add reverting commands here.
      *
