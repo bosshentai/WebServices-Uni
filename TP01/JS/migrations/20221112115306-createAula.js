@@ -3,52 +3,41 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('docente', {
+    await queryInterface.createTable('aula', {
       id: {
         type: Sequelize.INTEGER,
-        allowNull: true,
+        allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
       },
-      sigla: {
-        type: Sequelize.STRING(6),
-        allowNull: false,
-        unique: {
-          args: true,
-          msg: 'A sigla ja existe',
-        },
-      },
-      nome: {
-        type: Sequelize.STRING(45),
+      numero: {
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
-      nome_completo: {
-        type: Sequelize.STRING(80),
+      data: {
+        type: Sequelize.DATE,
         defaultValue: null,
       },
-      grau: {
-        type: Sequelize.STRING(45),
-        defaultValue: null,
-      },
-      id_user: {
+      id_disciplina: {
         type: Sequelize.INTEGER,
         defaultValue: null,
-        unique: {
-          args: true,
-          msg: 'Id de usuario ja existe na tabela docente',
+        references: {
+          model: 'edicao_disciplina',
+          key: 'id',
         },
-        references: { model: 'user', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
       },
-      area:{
+      id_horario:{
         type: Sequelize.INTEGER,
         defaultValue: null,
-        references: {model: 'departamento',key:'id'},
-        onupdate:'CASCADE',
+        references: {model: 'horario', key:'id'},
+        onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
       },
-      tipo_contrato:{
-        type: Sequelize.STRING(25),
+      tipo:{
+        type: Sequelize.STRING(45),
+        defaultValue: null,
       }
     })
     /**
@@ -60,7 +49,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.dropTable('docente')
+    await queryInterface.dropTable('aula')
     /**
      * Add reverting commands here.
      *
