@@ -33,6 +33,7 @@ class Curso extends Model {
         }, {
             sequelize: connection,
             tableName: 'curso',
+            modelName: 'Curso'
         })
     }
 

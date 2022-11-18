@@ -69,6 +69,7 @@ class User extends Model {
         }, {
             sequelize: connection,
             tableName: 'user',
+            // modelName: 'user',
         })
     }
 }
