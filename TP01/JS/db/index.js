@@ -15,3 +15,16 @@ const connect = async () => {
 }
 
 connect();
+
+const Curso = require('../models/Curso')
+const Disciplina = require('../models/Disciplina')
+const Departamento  = require('../models/Departamento')
+const Docente = require('../models/Docente')
+
+Curso.init(dbConn)
+Disciplina.init(dbConn)
+Departamento.init(dbConn)
+Docente.init(dbConn)
+
+
+module.exports = dbConn

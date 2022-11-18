@@ -22,3 +22,5 @@ app.listen(port, () =>
     `Server is running on http://localhost:${port}`,
   ),
 )
+
+module.exports = app

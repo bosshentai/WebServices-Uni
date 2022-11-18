@@ -10,7 +10,7 @@ const lerTodosDocentesController = lerTodosDocentes
 const criarDocenteController = criarDocente
 
 router.get('/',lerTodosDocentesController);
-router.post("/",criarDocenteController);
+router.post("/add",criarDocenteController);
 
 
 module.exports = router;

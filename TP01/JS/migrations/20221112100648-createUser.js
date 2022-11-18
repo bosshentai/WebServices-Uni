@@ -7,10 +7,15 @@ module.exports = {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        autoIncrement: false,
+        autoIncrement: true,
         primaryKey: true,
       },
       nome: {
+        type: Sequelize.STRING(45),
+        allowNull: false,
+        unique: true,
+      },
+      username: {
         type: Sequelize.STRING(45),
         allowNull: false,
         unique: true,

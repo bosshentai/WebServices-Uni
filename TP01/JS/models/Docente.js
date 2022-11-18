@@ -29,14 +29,6 @@ class Docente extends Model {
                     },
                 }
             },
-            ocupacao: {
-                type: DataTypes.STRING,
-                validate: {
-                    maxLength: val => {
-                        if (val.length > 45) throw new Error("Ocupação deve conter no máximo 45 caractéres")                 
-                    },
-                }
-            },
             grau: {
                 type: DataTypes.STRING,
                 validate: {
