@@ -1,109 +1,122 @@
 // const { UPSERT } = require('sequelize/types/query-types')
-const { Sequelize } = require('sequelize')
+// const { Sequelize } = require('sequelize')
+const {bcrycpt} = require('bcryptjs')
 const Docente = require('../models/Docente')
-const User = require('../models/User');
+const User = require('../models/User')
 
+const defaultPass = 'lala123'
 
 const lerTodosDocentes = async (req, res) => {
   try {
     const listaDocentes = await Docente.findAll()
     return res.status(200).json(listaDocentes)
   } catch (e) {
-    return res.status(500).json({ error: 'Lista Vazia' })
+    return res
+      .status(500)
+      .json({ error: 'Problema de coneccao' })
   }
 }
 
 const criarDocente = async (req, res) => {
-  // user
-  // nome , username. email,password, categoria
-
-  // docente
-  // sigla , nome, nome_completo, ocupacao , grau, tipo_contrato
-
   const {
-    username,
-    email,
-    password,
-    categoria,
     sigla,
     nome,
     nome_completo,
-
     grau,
+    area,
+    email,
     tipo_contrato,
   } = req.body
+  const pe1 = nome_completo.substring(
+    0,
+    nome_completo.indexOf(''),
+  )
+  const pe2 = nome_completo.substring(
+    nome_completo.lastIndexOf(''),
+  )
+  let userName = pe1 + pe2
 
-  console.log(req.body);
+  console.log(area)
 
   try {
+    const docente = await Docente.create({
+      sigla,
+      nome,
+      nome_completo,
+      grau,
+      area,
+      tipo_contrato,
+      id_user: null,
+    })
 
-    const newDocente = await User.create(
-      {nome,
-      username,
+    if (!docente) {
+      return res.status(400).json({
+        Error:
+          'Nao foi possivel processar pedido.Verificar se os parametros estao corretos',
+      })
+    }
+
+    const password = await bcrycpt.hash(
+      defaultPass,
+      await bcrycpt.genSalt(10),
+    )
+
+    const user = await User.create({
+      nome,
+      username: userName,
       email,
       password,
-      categoria,
-      docente:{
-        nome,
-        nome_completo,
-        grau,
-        tipo_contrato
-      },
+      categoria: 'docente',
+    })
 
-    },{
-      include: [Docente]
+    if (!user) {
+      await Docente.destroy({
+        where: { id: docente.getDataValues.id },
+      })
+      return res.status(400).json({
+        Error:
+          'Nao foi possivel processar pedido. Verifique se os parametros estao conrrectos',
+      })
     }
+
+    const { id: id_user } = user.getDataValues
+    console.log(id_user)
+    console.log(docente_id)
+    await Docente.update(
+      { id_user },
+      { where: { id: docente.id } },
     )
-    // const newDocente = await Docente.create(
-    //   {
-    //     sigla,
-    //     nome,
-    //     nome_completo,
-    //     grau,
 
-    //     user: {
-    //       nome,
-    //       username,
-    //       email,
-    //       password,
-    //       categoria,
-    //     },
-    //   },
-    //   {
-    //     include: [User]
-    //   }
-    // )
-
-    return res.status(201).json(newDocente)
+    res.status(201).json({ docente, user })
   } catch (e) {
-    return res.status(500).json({ error: 'Error Register' })
+    return res.status(500).json(e)
   }
+}
 
+const lerUmDocente = async (req, res) => {
+  const { id } = req.params
+
+  try {
+    const docente = await Docente.findByPk(id)
+
+    if (!docente) {
+      return res
+        .status(400)
+        .json({ Error: 'Docente nao encontrado' })
+    }
+
+    return res.status(200).json(docente)
+  } catch (e) {
+    // return res
+    //   .status(500)
+    //   .json({ Error: 'Problema de conecao' })
+    return res.status(500).json(e)
+  }
+  // return res.status(200)
 }
 
 module.exports = {
   lerTodosDocentes,
-  criarDocente
-
+  criarDocente,
+  lerUmDocente,
 }
-//   lerTodosDocentes: async (req, res) => {
-//     try {
-//         console.log("docente")
-
-//         // const docente = await Docente.findByPk(1)
-//         // console.log("docente")
-//         // console.log(docente)
-//         const docentes = await Docente.findAll()
-//         return res.status(200).json(docentes)
-//     }
-//     catch (error) {
-//         //console.log(res.json(error))
-//         return res.status(500).json(error.message)
-//     }
-// }
-
-
-  // criarDocente,
-
-
-// const learTodosDocentes

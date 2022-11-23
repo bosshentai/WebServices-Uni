@@ -1,17 +1,16 @@
-const express = require('express');
-const {lerTodosCursos, criarCurso} = require('../controllers/CursoController');
+const express = require('express')
+const {
+  lerTodosCursos,
+  criarCurso,
+  
+} = require('../controllers/CursoController')
 
-
-const router = express.Router();
+const router = express.Router()
 router.use(express.json())
 
-
 const lerTodosCursosController = lerTodosCursos
-const criarCursoController = criarCurso
 
 
-router.get('/',lerTodosCursosController);
-router.post('/',criarCursoController);
+router.get('/', lerTodosCursosController)
 
-
-module.exports = router;
+module.exports = router

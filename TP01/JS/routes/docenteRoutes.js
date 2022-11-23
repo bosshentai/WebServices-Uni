@@ -1,18 +1,23 @@
-const express = require('express');
-const { lerTodosDocentes, criarDocente } = require('../controllers/DocenteControllers');
+const express = require('express')
+const {
+  lerTodosDocentes,
+  criarDocente,
+  lerUmDocente,
+} = require('../controllers/DocenteControllers')
 // import { Router } from "express"
 
 const router = express.Router()
 router.use(express.json())
 
-
 const lerTodosDocentesController = lerTodosDocentes
-const criarDocenteController = criarDocente
+const lerUmDocenteController = lerUmDocente
+const criarCursoController = criarDocente
 
-router.get('/',lerTodosDocentesController);
-router.post("/add",criarDocenteController);
+router.get('/', lerTodosDocentesController)
 
+router.get('/:id', lerUmDocenteController)
+router.post('/newDocente', criarCursoController)
 
-module.exports = router;
+module.exports = router
 
 // cons
