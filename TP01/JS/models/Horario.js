@@ -33,7 +33,7 @@ class Horario extends Model {
     }
 
     static associate(models){
-        this.belongsTo(models.EdicaoDisciplina, { foreignKey: 'id_disciplina', as: 'id_disciplina' })        
+        this.belongsTo(models.EdicaoDisciplina, { foreignKey: 'id_aula', as: 'aula' })        
     }
 }
 

@@ -1,10 +1,12 @@
 // const { UPSERT } = require('sequelize/types/query-types')
 // const { Sequelize } = require('sequelize')
-const {bcrycpt} = require('bcryptjs')
+const  bcrypt  = require('bcryptjs')
 const Docente = require('../models/Docente')
 const User = require('../models/User')
 
 const defaultPass = 'lala123'
+
+// const defaultPass = process.env.DEFAULr_USER_PASSWORD
 
 const lerTodosDocentes = async (req, res) => {
   try {
@@ -29,14 +31,17 @@ const criarDocente = async (req, res) => {
   } = req.body
   const pe1 = nome_completo.substring(
     0,
-    nome_completo.indexOf(''),
+    nome_completo.indexOf(' '),
   )
   const pe2 = nome_completo.substring(
-    nome_completo.lastIndexOf(''),
+    nome_completo.lastIndexOf(' '),
   )
-  let userName = pe1 + pe2
+  let userName = pe1 + pe2;
 
-  console.log(area)
+  console.log("pe1 " + pe1);
+  console.log("pe2 " + pe2);
+
+  console.log("userName antes " +userName);
 
   try {
     const docente = await Docente.create({
@@ -56,10 +61,17 @@ const criarDocente = async (req, res) => {
       })
     }
 
-    const password = await bcrycpt.hash(
+    const password = await bcrypt.hash(
       defaultPass,
-      await bcrycpt.genSalt(10),
+      await bcrypt.genSalt(10),
     )
+
+    console.log("Password gerado " + password);
+
+    console.log("Nome " + nome);
+    console.log("email "+ email);
+    console.log("Username " + userName)
+
 
     const user = await User.create({
       nome,
@@ -69,9 +81,12 @@ const criarDocente = async (req, res) => {
       categoria: 'docente',
     })
 
+    // console.log("Nome "+user.nome)
+
+
     if (!user) {
       await Docente.destroy({
-        where: { id: docente.getDataValues.id },
+        where: { id: docente.dataValues.id },
       })
       return res.status(400).json({
         Error:
@@ -79,9 +94,9 @@ const criarDocente = async (req, res) => {
       })
     }
 
-    const { id: id_user } = user.getDataValues
-    console.log(id_user)
-    console.log(docente_id)
+    const { id: id_user } = user.dataValues
+    console.log("user id " + id_user)
+    console.log("Docente id" + docente.id)
     await Docente.update(
       { id_user },
       { where: { id: docente.id } },

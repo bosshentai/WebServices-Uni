@@ -40,8 +40,8 @@ class User extends Model {
                         args: true,
                         msg: "Email inválido",
                     },
-                    isUTA(value) {
-                        let regexp = /^[A-Za-z0-9._%+-]+@uta.cv$/
+                    isMINDELO(value) {
+                        let regexp = /^[A-Za-z0-9._%+-]+@unimindelo.edu.cv$/
                         if (!regexp.test(value)){
                             throw new Error("Email inválido")
                         }

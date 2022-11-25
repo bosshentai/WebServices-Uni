@@ -53,7 +53,7 @@ class Docente extends Model {
 
     static associate(models){
         this.belongsTo(models.User, { foreignKey: 'id_user', as: 'user' })
-        this.belongsTo(models.GrupoDisciplinar, { foreignKey: 'area', as: 'grupo_disciplinar' })
+        this.belongsTo(models.Departamento, { foreignKey: 'area', as: 'grupo_disciplinar' })
         this.belongsToMany(models.Disciplina, { foreignKey: 'id_docente', through: 'dsd', as: 'disciplina' })
     }
 }
