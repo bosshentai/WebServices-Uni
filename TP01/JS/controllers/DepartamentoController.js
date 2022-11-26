@@ -57,6 +57,16 @@ const updateDepartamento = async (req, res) => {
   const { nome } = req.body
 
   try {
+    const departamentoExist = await Departamento.findByPk(
+      id,
+    )
+
+    if (!departamentoExist) {
+      return res
+        .status(400)
+        .json({ Error: 'Departamento nao encontrado' })
+    }
+
     const updatedDepartamento = await Departamento.update(
       { nome },
       { where: { id } },
@@ -75,24 +85,35 @@ const updateDepartamento = async (req, res) => {
   }
 }
 
-
 const deleteDepartamento = async (req, res) => {
+  const { id } = req.params
 
-  const {id} = req.params
+  try {
 
-  try{
+    const departamentoExist = await Departamento.findByPk(
+      id,
+    )
+
+    if (!departamentoExist) {
+      return res
+        .status(400)
+        .json({ Error: 'Departamento nao encontrado' })
+    }
 
 
-    const destroyedDepartamento = await Departamento.destroy({where:{id}})
 
-    if(!destroyedDepartamento){
+    const destroyedDepartamento =
+      await Departamento.destroy({ where: { id } })
+
+    if (!destroyedDepartamento) {
       return res.status(204).json({
-        Error:'Nao foi possivel processar pedido.Verifica se os paramentros estao corretos'
+        Error:
+          'Nao foi possivel processar pedido.Verifica se os paramentros estao corretos',
       })
     }
 
     return res.status(200).json(destroyedDepartamento)
-  }catch(error){
+  } catch (error) {
     return res.status(500).json(error)
   }
 }
@@ -102,5 +123,5 @@ module.exports = {
   getOneDepartamento,
   createDepartamento,
   updateDepartamento,
-  deleteDepartamento
+  deleteDepartamento,
 }
