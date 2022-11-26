@@ -38,10 +38,10 @@ const criarDocente = async (req, res) => {
   )
   let userName = pe1 + pe2;
 
-  console.log("pe1 " + pe1);
-  console.log("pe2 " + pe2);
+  // console.log("pe1 " + pe1);
+  // console.log("pe2 " + pe2);
 
-  console.log("userName antes " +userName);
+  // console.log("userName antes " +userName);
 
   try {
     const docente = await Docente.create({
@@ -66,11 +66,11 @@ const criarDocente = async (req, res) => {
       await bcrypt.genSalt(10),
     )
 
-    console.log("Password gerado " + password);
+    // console.log("Password gerado " + password);
 
-    console.log("Nome " + nome);
-    console.log("email "+ email);
-    console.log("Username " + userName)
+    // console.log("Nome " + nome);
+    // console.log("email "+ email);
+    // console.log("Username " + userName)
 
 
     const user = await User.create({
@@ -95,8 +95,8 @@ const criarDocente = async (req, res) => {
     }
 
     const { id: id_user } = user.dataValues
-    console.log("user id " + id_user)
-    console.log("Docente id" + docente.id)
+    // console.log("user id " + id_user)
+    // console.log("Docente id" + docente.id)
     await Docente.update(
       { id_user },
       { where: { id: docente.id } },

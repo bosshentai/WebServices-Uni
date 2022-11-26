@@ -14,8 +14,8 @@ const lerUmDocenteController = lerUmDocente
 const criarCursoController = criarDocente
 
 router.get('/', lerTodosDocentesController)
-
 router.get('/:id', lerUmDocenteController)
+
 router.post('/newDocente', criarCursoController)
 
 module.exports = router
