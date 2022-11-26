@@ -1,4 +1,6 @@
+// import { getOneD } from '../provider/DepartamentoProvider'
 const Departamento = require('../models/Departamento')
+const {getOneD} = require('../provider/DepartamentoProvider')
 
 const getAllDepartamentos = async (req, res) => {
   try {
@@ -16,8 +18,14 @@ const getOneDepartamento = async (req, res) => {
   const { id } = req.params
 
   try {
-    const departamento = await Departamento.findByPk(id)
 
+    const departamento = await getOneD(id)
+
+    // const departamento = await Departamento.findByPk(id)
+
+    // if(departamento.isEmpty()){
+    //   return res.status(400).json({Error: "Departamento nao encontrado"})
+    // }
     if (!departamento) {
       return res
         .status(400)

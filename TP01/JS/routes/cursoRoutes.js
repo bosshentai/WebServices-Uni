@@ -8,9 +8,9 @@ const {
 const router = express.Router()
 router.use(express.json())
 
-const lerTodosCursosController = lerTodosCursos
+// const lerTodosCursosController = lerTodosCursos
 
 
-router.get('/', lerTodosCursosController)
+// router.get('/', lerTodosCursosController)
 
 module.exports = router
