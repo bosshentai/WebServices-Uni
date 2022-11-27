@@ -1,16 +1,17 @@
 const express = require('express')
 const {
-  lerTodosCursos,
+  getAllCursos,
+  getOneCurso,
   criarCurso,
-  
 } = require('../controllers/CursoController')
 
 const router = express.Router()
 router.use(express.json())
 
-// const lerTodosCursosController = lerTodosCursos
+const getAllCursosController = getAllCursos
+const getOneCursoController = getOneCurso
 
-
-// router.get('/', lerTodosCursosController)
+router.get('/', getAllCursosController)
+router.get('/:id', getOneCurso)
 
 module.exports = router

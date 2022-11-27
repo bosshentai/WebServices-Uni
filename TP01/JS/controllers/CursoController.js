@@ -1,9 +1,11 @@
 // const { Sequelize} = require('sequelize');
 const Curso = require('../models/Curso')
+const { getAllC, getOneC } = require('../provider/CursoProvider')
 
 const getAllCursos = async (req, res) => {
   try {
-    const listaCursos = await Curso.findAll()
+    const listaCursos = await getAllC()
+    // const listaCursos = await Curso.findAll()
 
     return res.status(201).json(listaCursos)
   } catch (e) {
@@ -15,7 +17,8 @@ const getOneCurso = async (req, res) => {
   const { id } = req.params
 
   try {
-    const curso = await Curso.findByPk(id)
+    const curso = await getOneC(id)
+    // const curso = await Curso.findByPk(id)
 
     if (!curso) {
       return res
@@ -42,12 +45,10 @@ const createCurso = async (req, res) => {
     const newCurso = await curso.create(curso)
 
     if (!newCurso) {
-      return res
-        .status(400)
-        .json({
-          Error:
-            'Nao foi possivel processar pedido. Verifca se os paramentros estao corretos',
-        })
+      return res.status(400).json({
+        Error:
+          'Nao foi possivel processar pedido. Verifca se os paramentros estao corretos',
+      })
     }
 
     return res.status(201).json(newCurso)
@@ -57,20 +58,15 @@ const createCurso = async (req, res) => {
   }
 }
 
+const updateCurso = async (req, res) => {
+  const { nome } = req.body
+  const { id } = req.params
 
-const updateCurso = async(req, res) =>{
-  const {nome} = req.body
-  const {id} = req.params
-
-
-  try{
-    const cursoExist = await Curso.findByPk(id);
-  }catch(e){
+  try {
+    const cursoExist = await Curso.findByPk(id)
+  } catch (e) {
     return res.status(400).json(e)
   }
-
-
 }
-
 
 module.exports = { getAllCursos, createCurso, getOneCurso }
