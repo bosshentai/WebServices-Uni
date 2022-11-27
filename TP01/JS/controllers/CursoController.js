@@ -1,6 +1,6 @@
 // const { Sequelize} = require('sequelize');
 const Curso = require('../models/Curso')
-const { getAllC, getOneC } = require('../provider/CursoProvider')
+const { getAllC, getOneC, createC } = require('../provider/CursoProvider')
 
 const getAllCursos = async (req, res) => {
   try {
@@ -33,16 +33,13 @@ const getOneCurso = async (req, res) => {
 }
 
 const createCurso = async (req, res) => {
-  // const { sigla, nome, conferegrau } = req.body
+  const { sigla, nome, conferegrau } = req.body
 
   try {
-    const curso = {
-      sigla: req.body.sigla,
-      nome: req.body.nome,
-      conferegrau: req.body.conferegrau,
-    }
 
-    const newCurso = await curso.create(curso)
+    const newCurso = await createC(sigla,nome,conferegrau)
+
+
 
     if (!newCurso) {
       return res.status(400).json({

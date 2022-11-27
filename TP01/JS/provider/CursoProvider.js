@@ -12,9 +12,20 @@ const getOneC = async(id) =>{
   return curso
 }
 
+const createC = async(sigla,nome,conferegrau) =>{
 
+  const newC = await Curso.create({
+    sigla,
+    nome,
+    conferegrau
+  })
+
+
+  return newC
+}
 
 module.exports = {
   getAllC,
-  getOneC
+  getOneC,
+  createC
 }
