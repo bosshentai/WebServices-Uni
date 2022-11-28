@@ -6,7 +6,7 @@ const {
   createC,
   existC,
   updateC,
-  deleteC
+  deleteC,
 } = require('../provider/CursoProvider')
 
 const getAllCursos = async (req, res) => {
@@ -60,7 +60,7 @@ const createCurso = async (req, res) => {
 }
 
 const updateCurso = async (req, res) => {
-  const { sigla,nome, conferegrau } = req.body
+  const { sigla, nome, conferegrau } = req.body
   const { id } = req.params
 
   try {
@@ -80,11 +80,9 @@ const updateCurso = async (req, res) => {
     )
 
     if (updateCurso === null) {
-      return res
-        .status(404)
-        .json({
-          Error: 'Nao foi possivel processar pedido',
-        })
+      return res.status(404).json({
+        Error: 'Nao foi possivel processar pedido',
+      })
     }
 
     return res.status(204).json(updateCurso)
@@ -93,28 +91,39 @@ const updateCurso = async (req, res) => {
   }
 }
 
+const deleteCurso = async (req, res) => {
+  const { id } = req.params
 
-const deleteCurso = async (req,res)=>{
-  const {id} = req.params
-
-  try{
+  try {
     const cursoExist = await existC(id)
 
-    if(cursoExist ===false){
-      return res.status(400).json({Error:"Curso nao encontrado"})
+    if (cursoExist === false) {
+      return res
+        .status(400)
+        .json({ Error: 'Curso nao encontrado' })
     }
 
     const destroyedCurso = await deleteC(id)
 
-    if(!destroyedCurso){
-      return res.status(404).json({Error:"Nao foi possivel processar pedido"})
+    if (!destroyedCurso) {
+      return res
+        .status(404)
+        .json({
+          Error: 'Nao foi possivel processar pedido',
+        })
     }
 
     return res.status(200).json(destroyedCurso)
     // return
-  }catch(e){
-    return 
+  } catch (e) {
+    return
   }
 }
 
-module.exports = { getAllCursos, createCurso, getOneCurso,updateCurso }
+module.exports = {
+  getAllCursos,
+  createCurso,
+  getOneCurso,
+  updateCurso,
+  deleteCurso,
+}
