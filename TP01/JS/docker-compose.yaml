@@ -10,7 +10,7 @@ services:
     volumes:
       - .:/app/node/app
     extra_hosts:
-      - "host.docker.internal:172.17.0.1"
+      - "host.docker.internal:172.0.0.1"
     networks:
       - tp01-network
     depends_on:
@@ -32,20 +32,9 @@ services:
     networks:
       - tp01-network
 
-  # pgadmin:
-  #   image: dpage/pgadmin4
-  #   environment:
-  #       PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com
-  #       PGADMIN_DEFAULT_PASSWORD: password
-  #       PGADMIN_LISTEN_PORT: 80
-  #   ports:
-  #     - 15432:80
-  #   volumes:
-  #     - pdadmin:/var/lib/pdadmin
-  #   depends_on:
-  #     - db
-  #   networks:
-  #     - tp01-network
+
+
+
 
 
 
@@ -54,8 +43,7 @@ services:
 
 networks:
   tp01-network:
-      driver: bridge
+      # driver: bridge
 
 volumes:
   data_postgres: {}
-  pdadmin: {}

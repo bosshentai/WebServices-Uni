@@ -86,11 +86,9 @@ const updateDepartamento = async (req, res) => {
     const updateDepartamento = await updateD(id, nome)
 
     if (updateDepartamento === null) {
-      return res
-        .status(404)
-        .json({
-          Error: 'Nao foi possivel processar pedido',
-        })
+      return res.status(404).json({
+        Error: 'Nao foi possivel processar pedido',
+      })
     }
 
     return res.status(204).json(updateDepartamento)
