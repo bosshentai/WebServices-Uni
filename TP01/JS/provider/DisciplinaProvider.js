@@ -37,18 +37,18 @@ const updateDisc = async (id, codigo, nome, sinopse) => {
   return updateDisciplina
 }
 
-
-const discExist = async (id) =>{
+const discExist = async (id) => {
   const disciplina = await Disciplina.findByPk(id)
-  if(disciplina !== null){
+  if (disciplina !== null) {
     return true
   }
   return false
 }
 
-
-const deleteDisc = async (id) =>{
-  const deleteD = await Disciplina.destroy(id)
+const deleteDisc = async (id) => {
+  const deleteD = await Disciplina.destroy({
+    where: { id },
+  })
 
   return deleteD
 }
@@ -59,5 +59,5 @@ module.exports = {
   createDisc,
   updateDisc,
   discExist,
-  deleteDisc
+  deleteDisc,
 }
