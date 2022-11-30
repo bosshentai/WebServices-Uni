@@ -8,8 +8,8 @@ module.exports = {
       [
         {
           nome: 'Paulo Silva',
-          username: 'pas@umindelo.edu.cv',
-          email: 'pas@umindelo.edu.cv',
+          username: 'pas@unimindelo.edu.cv',
+          email: 'pas@unimindelo.edu.cv',
           password: 'lala123',
           categoria: 'docente',
         },
