@@ -15,7 +15,7 @@ const getAllEdicaoDisciplina = async (req, res) => {
 
     // const listaEdicaoDisciplina = await EdicaoDisciplina.findAll()
 
-    console.log(listaEdicaoDisciplina)
+    // console.log(listaEdicaoDisciplina)
     // console.log(JSON.stringify(listaEdicaoDisciplina))
 
     return res.status(200).json(listaEdicaoDisciplina)
@@ -55,11 +55,11 @@ const createEdicaoDisciplina = async (req, res) => {
     id_disciplina,
   } = req.body
 
-  console.log('edicao ' + edicao)
-  console.log('estado ' + estado)
-  console.log('ano_lectivo' + ano_lectivo)
-  console.log('periodo ' + periodo)
-  console.log('id_disciplina ' + id_disciplina)
+  // console.log('edicao ' + edicao)
+  // console.log('estado ' + estado)
+  // console.log('ano_lectivo' + ano_lectivo)
+  // console.log('periodo ' + periodo)
+  // console.log('id_disciplina ' + id_disciplina)
   try {
     const newEdicaoDisciplina = await createED(
       edicao,
