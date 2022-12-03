@@ -58,8 +58,13 @@ const createPlanoCurso = async (req, res) => {
       ano,
       semestre,
       activo,
-    
+
     )
+
+    if(!newPlanoCurso) {
+      return res.status(400).json({Error:"Nao foi possivel processar pedido"})
+    }
+
 
     return res.status(201).json(newPlanoCurso)
   } catch (e) {
@@ -76,7 +81,7 @@ const updatePlanoCurso = async (req, res) => {
     ano,
     semestre,
     activo,
-    data_status,
+    // data_status,
   } = req.body
 
   try {

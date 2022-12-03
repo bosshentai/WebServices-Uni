@@ -24,8 +24,8 @@ class Horario extends Model {
             },
             duracao: {
                 type: DataTypes.INTEGER,
-                
-            },            
+
+            },
         }, {
             sequelize: connection,
             tableName: 'horario',
@@ -33,7 +33,7 @@ class Horario extends Model {
     }
 
     static associate(models){
-        this.belongsTo(models.EdicaoDisciplina, { foreignKey: 'id_aula', as: 'aula' })        
+        this.belongsTo(models.EdicaoDisciplina, { foreignKey: 'id_disciplina', as: 'disciplina' })
     }
 }
 

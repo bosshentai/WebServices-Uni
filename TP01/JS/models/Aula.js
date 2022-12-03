@@ -56,7 +56,7 @@ class Aula extends Model {
     }
 
     static associate(models){
-        this.belongsTo(models.EdicaoDisciplina, { foreignKey: 'disciplina', as: 'edicao_disciplina' })
+        // this.belongsTo(models.EdicaoDisciplina, { foreignKey: 'id_disciplina', as: 'edicao_disciplina' })
         this.belongsTo(models.Horario, { foreignKey: 'id_horario', as: 'horario' })
     }
 }

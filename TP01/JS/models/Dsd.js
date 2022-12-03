@@ -24,6 +24,10 @@ class Dsd extends Model {
             tableName: 'dsd',
         })
     }
+    static associate(models){
+        this.belongsTo(models.EdicaoDisciplina, { foreignKey: 'id_disciplina', as: 'edicao_disciplina' })
+        this.belongsTo(models.Docente, { foreignKey: 'id_docente', as: 'docente' })
+    }
 }
 
 module.exports = Dsd

@@ -29,6 +29,7 @@ services:
       POSTGRES_DB: tp01
     ports:
       - "12345:5432"
+      #  - "12345:12345"
     networks:
       - tp01-network
 

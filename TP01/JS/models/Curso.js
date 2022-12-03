@@ -33,13 +33,13 @@ class Curso extends Model {
         }, {
             sequelize: connection,
             tableName: 'curso',
-            modelName: 'Curso'
+            // modelName: 'Curso'
         })
     }
 
     static associate(models){
         this.belongsToMany(models.Disciplina, { foreignKey: 'id_curso', through: 'plano_curso', as: 'disciplina' })
-        this.belongsToMany(models.Horario, { foreignKey: 'id_curso', through: 'horario_curso', as: 'horario' })
+        // this.belongsToMany(models.Horario, { foreignKey: 'id_curso', through: 'horario_curso', as: 'horario' })
     }
 }
 

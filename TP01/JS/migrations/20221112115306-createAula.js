@@ -1,9 +1,8 @@
-'use strict'
+'use strict';
 
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('aula', {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable('aula', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -18,43 +17,21 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: null,
       },
-      id_disciplina: {
+      id_horario: {
         type: Sequelize.INTEGER,
         defaultValue: null,
-        references: {
-          model: 'edicao_disciplina',
-          key: 'id',
-        },
+        references: { model: 'horario', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
       },
-      id_horario:{
-        type: Sequelize.INTEGER,
-        defaultValue: null,
-        references: {model: 'horario', key:'id'},
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-      },
-      tipo:{
+      tipo: {
         type: Sequelize.STRING(45),
-        defaultValue: null,
+        defaultValue: null
       }
     })
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
   },
 
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('aula')
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
-  },
-}
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.dropTable('aula')
+  }
+};
