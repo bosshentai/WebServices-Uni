@@ -7,33 +7,6 @@ class Aula extends Model {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
-            dia_semana: {
-                type: DataTypes.STRING,
-                validate: {
-                    maxLength: val => {
-                        if (val.length > 45) throw new Error("Dia da semana deve conter no máximo 45 caractéres")
-                    },
-                }
-            },
-            hora: { 
-                type: DataTypes.DATE,
-            },
-            local: {
-                type: DataTypes.STRING,
-                validate: {
-                    maxLength: val => {
-                        if (val.length > 45) throw new Error("Local deve conter no máximo 45 caractéres")
-                    },
-                }
-            },
-            duracao: {
-                type: DataTypes.STRING,
-                validate: {
-                    maxLength: val => {
-                        if (val.length > 45) throw new Error("Duração deve conter no máximo 45 caractéres")
-                    },
-                }
-            },
             data: {
                 type: DataTypes.DATE,
             },

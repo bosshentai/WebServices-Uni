@@ -116,7 +116,7 @@ const deleteCurso = async (req, res) => {
     return res.status(200).json(destroyedCurso)
     // return
   } catch (e) {
-    return
+    return res.status(500).json(e)
   }
 }
 
