@@ -3,7 +3,7 @@
     "username": "postgres",
     "password": "postgres",
     "database": "tp01",
-    "host": "localhost",
+    "host": "postgres",
     "port": "12345",
     "dialect": "postgres",
     "define":{

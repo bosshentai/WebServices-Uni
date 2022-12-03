@@ -10,6 +10,7 @@ const edicaoDisciplinaRouters = require('./routes/EdicaoDisciplinaRoutes')
 const planoCursoRouters = require("./routes/PlanoCursoRoutes")
 const horarioRouters = require('./routes/HorarioRoutes')
 const aulaRouters = require('./routes/AulaRoutes')
+const dsdRouters = require('./routes/DsdRoutes')
 dotenv.config()
 require('./db')
 
@@ -25,6 +26,7 @@ app.use('/edicaoDisciplina',edicaoDisciplinaRouters)
 app.use('/planoCurso', planoCursoRouters)
 app.use('/horario',horarioRouters)
 app.use('/aula',aulaRouters)
+app.use("/dsd", dsdRouters)
 
 
 app.disable('x-powered-by')

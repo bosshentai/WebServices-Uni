@@ -4,6 +4,13 @@ const Sequelize = require('sequelize')
 const db_config = require("../config/database")
 
 const dbConn = new Sequelize(db_config)
+// const dbConn = new Sequelize(
+//   process.env.D
+//   ,{
+//     host:
+//   }
+// )
+
 
 const connect = async () => {
   try {
