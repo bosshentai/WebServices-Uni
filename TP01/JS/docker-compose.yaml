@@ -6,8 +6,11 @@ services:
     entrypoint: .docker/entrypoint.sh
     container_name: tp01
     # env_file: .env
-    # environment:
-    #   - PGHOST=db
+    environment:
+       PGHOST: db
+       PGDATABASE: postgres
+       PGUSER: postgres
+       PGPASSWORD: postgres
     #   - PGDATABASE=postgres
         # - PGHOST: "db"
 
@@ -39,6 +42,8 @@ services:
       POSTGRES_DB: tp01
     ports:
       - "12345:12345"
+    expose:
+      - "12345"
     networks:
       - tp01-network
 
@@ -48,8 +53,9 @@ services:
 
 
 networks:
-  tp01-network:
-      driver: local
+  tp01-network: {}
+  # tp01-network:
+  #     driver: bridge
 
 volumes:
   data_postgres: {}
