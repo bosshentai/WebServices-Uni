@@ -1,0 +1,47 @@
+version: "3.7"
+
+
+services:
+  pratico:
+    build: .
+    entrypoint: .docker/entrypoint.sh
+    container_name: apipratico
+    image: trabalhopraticoapi
+    environment:
+      PGHOST: dbpratico
+    ports:
+      - "2000:2000"
+    volumes:
+      - .:/app
+
+    networks:
+      - pratico-network
+
+
+  dbpratico:
+    build: .docker/postgres
+    container_name: dbpratico
+    restart: always
+    tty: true
+    volumes:
+      - data_postgres:/var/lib/postgressql/data
+
+    environment:
+      PGPORT: 2001
+      POSTGRES_USER: trabalhoPratico
+      POSTGRES_PASSWORD: trabalhoPratico
+      POSTGRES_DB: trabalhoPratico
+    ports:
+      - "2001:2001"
+
+    networks:
+      - pratico-network
+
+
+
+networks:
+  pratico-network: {}
+
+
+volumes:
+  data_postgres: {}

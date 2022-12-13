@@ -1,0 +1,20 @@
+{
+  "development":{
+    "username":"trabalhoPratico",
+    "password": "trabalhoPratico",
+    "database": "trabalhoPratico",
+    "host":"localhost",
+    "port": "2001",
+    "dialect": "postgres",
+    "define":{
+      "timestamps": false,
+      "underscore": true
+    }
+  },
+  "test":{
+
+  },
+  "production":{
+    
+  }
+}
