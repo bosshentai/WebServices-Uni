@@ -5,6 +5,7 @@ services:
     build: .
     entrypoint: .docker/entrypoint.sh
     container_name: tp01
+    image: tp01api
     environment:
        PGHOST: db
        PGDATABASE: postgres

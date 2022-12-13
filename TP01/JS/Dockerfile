@@ -9,6 +9,8 @@ WORKDIR /home/node/app
 
 
 
+
+
 COPY package*.json ./
 
 # COPY tsconfig.json ./
