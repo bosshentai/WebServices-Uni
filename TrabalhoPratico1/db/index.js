@@ -16,6 +16,24 @@ const connect = async () =>{
 }
 connect();
 
+const Viagem = require('../models/Viagem');
+const Carga = require('../models/Carga');
+const Passageiro = require("../models/Passageiro");
+
+
+
+
+Viagem.init(dbConn)
+Carga.init(dbConn)
+Passageiro.init(dbConn)
+
+Carga.associate(dbConn.models)
+Passageiro.associate(dbConn.models)
+
+
+
+
+
 
 module.exports = dbConn
 

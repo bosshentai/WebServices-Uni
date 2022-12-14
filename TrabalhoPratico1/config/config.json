@@ -3,7 +3,7 @@
     "username":"trabalhoPratico",
     "password": "trabalhoPratico",
     "database": "trabalhoPratico",
-    "host":"localhost",
+    "host":"dbPratico",
     "port": "2001",
     "dialect": "postgres",
     "define":{

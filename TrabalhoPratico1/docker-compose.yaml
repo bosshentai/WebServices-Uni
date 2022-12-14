@@ -13,6 +13,8 @@ services:
       - "2000:2000"
     volumes:
       - .:/app
+    depends_on:
+      - dbpratico
 
     networks:
       - pratico-network
