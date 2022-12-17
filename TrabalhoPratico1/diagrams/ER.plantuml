@@ -1,0 +1,68 @@
+@startuml ERDiagram
+
+
+' entity "Agente" as a1 {
+'   * id : id <<generated>>
+'   --
+'   * name : string
+' }
+
+' entity "Autoridade" as au {
+'   * id: id << genrated>>
+'   --
+'   * name : string
+' }
+
+
+entity "Cliente" as c1 {
+  * id : number <<generated>> <<PK>>
+ * nome : string <<unique>>
+ * tipo: string <<Agente|Autoridade>>
+ token : string <<unique>>
+
+}
+
+' entity "Token" as token {
+'   * id : number <<generated>> PK
+'   * id_Agente <<ForeignTe>>
+'   token : string <<unique>>
+' }
+
+entity "Viagem" as v1 {
+  * id_viagem : <<Generate>> <<PK>>
+   * imo: <<FK>>
+  porto_partida : string
+  porto_destino : string
+  hora_partida : string
+  hora_chegada: string
+
+}
+
+entity "barco" as bar {
+  * imo : number <<Generate>> <<PF>>
+  * nome_barco : String
+  * id_client: string
+
+}
+
+entity "Carga" as car {
+  * id_carga : number
+  * id_viagem : number
+  * numero_de_carga : number
+}
+
+entity "Passageiros" as pass {
+  * id_passageiros : number
+  * id_viagem : number
+  * numero_de_passageiro : number
+}
+
+
+
+' c1 |o--o| token
+c1 |o--o| bar
+bar |o--o{ v1
+v1 |o--o| car
+v1 |o--o| pass
+
+@enduml

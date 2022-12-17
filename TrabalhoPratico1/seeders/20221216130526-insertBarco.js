@@ -1,17 +1,17 @@
-'use strict'
+'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('autoridade', [
+  async up (queryInterface, Sequelize) {
+    await queryInterface.bulkInsert('barco',[
       {
-        name: 'Hernani ',
-        token: 'baptq',
+        name: "Mar Liso",
+        id_cliente: '1',
       },
       {
-        name: 'Iven',
-        token: 'lopse',
-      },
+        name: "Mar Canal",
+        id_cliente: '3',
+      }
     ])
     /**
      * Add seed commands here.
@@ -21,16 +21,16 @@ module.exports = {
      *   name: 'John Doe',
      *   isBetaMember: false
      * }], {});
-     */
+    */
   },
 
-  async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('autoridade', null, {})
+  async down (queryInterface, Sequelize) {
+    await queryInterface.bulkDelete('barco', null,{})
     /**
      * Add commands to revert seed here.
      *
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-  },
-}
+  }
+};

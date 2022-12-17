@@ -16,19 +16,29 @@ const connect = async () =>{
 }
 connect();
 
-const Viagem = require('../models/Viagem');
-const Carga = require('../models/Carga');
-const Passageiro = require("../models/Passageiro");
+const Cliente = require('../models/Cliente')
+const Barco = require('../models/Barco')
+const Viagem = require('../models/Viagem')
 
+// const Viagem = require('../models/Viagem');
+// const Carga = require('../models/Carga');
+// const Passageiro = require("../models/Passageiro");
 
-
-
+Cliente.init(dbConn)
+Barco.init(dbConn)
 Viagem.init(dbConn)
-Carga.init(dbConn)
-Passageiro.init(dbConn)
 
-Carga.associate(dbConn.models)
-Passageiro.associate(dbConn.models)
+
+Barco.associate(dbConn.models)
+Viagem.associate(dbConn.models)
+
+
+// Viagem.init(dbConn)
+// Carga.init(dbConn)
+// Passageiro.init(dbConn)
+
+// Carga.associate(dbConn.models)
+// Passageiro.associate(dbConn.models)
 
 
 

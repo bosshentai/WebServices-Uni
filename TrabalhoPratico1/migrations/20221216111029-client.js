@@ -3,29 +3,34 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('viagem', {
+    await queryInterface.createTable('cliente', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      porto_partido: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: {
+          args: true,
+          msg: 'Nome ja existe',
+        },
       },
-      porto_destino: {
+      tipo: {
+        type: Sequelize.ENUM({
+          values: ['AUTORIDADE', 'AGENTE'],
+        }),
+        allowNull: false,
+      },
+      token: {
         type: Sequelize.STRING,
-        allowNull: false,
+        unique: {
+          args: true,
+          msg: 'Token ja existe',
+        },
       },
-      hora_partida: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      hora_chegada: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      }
     })
     /**
      * Add altering commands here.
@@ -36,7 +41,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('viagem')
+    await queryInterface.dropTable('cliente')
     /**
      * Add reverting commands here.
      *
