@@ -1,0 +1,348 @@
+{
+	"info": {
+		"_postman_id": "98f4be7b-8a6e-4dd0-b916-1600e1e70fac",
+		"name": "Trabalho Pratico",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19736486"
+	},
+	"item": [
+		{
+			"name": "Barco",
+			"item": [
+				{
+					"name": "Lista de Barco",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "asd123f",
+								"description": "KEY-API",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:2000/barco/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"barco",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One Barco",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2000/barco/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"barco",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Viagem",
+			"item": [
+				{
+					"name": "Criar viagem",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var now = new Date();",
+									"var later = new Date(new Date().getTime() + 2 * 60 * 60 * 1000)",
+									"",
+									"",
+									"pm.environment.set('horadePartida',now.toISOString())",
+									"",
+									"pm.environment.set('horaDeChegada',later.toISOString())",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "asd123f",
+								"description": "token agente",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "asd123asacz",
+								"description": "token Autoridade",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"imo\": \"1\",\n    \"porto_partida\": \"Santo Antão\",\n    \"porto_destino\": \"São Vicente\",\n    \"hora_partida\":\"{{horadePartida}}\",\n    \"hora_chegada\":\"{{horaDeChegada}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/viagem/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"viagem",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Passageiro",
+			"item": [
+				{
+					"name": "Lista de todos os passageiros",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2000/passageiro",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"passageiro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get um passageiro",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2000/passageiro/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"passageiro",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar um Passageiro",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "asczxceascdcdz",
+								"description": "token agente",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_viagem\": \"3\",\n    \"quantidade_passageiro\": \"10\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/passageiro",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"passageiro"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cliente",
+			"item": [
+				{
+					"name": "Criar um Cliente Agente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Alex\",\n    \"tipo\": \"AGENTE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/cliente/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"cliente",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar um Cliente Autoridade",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"zalim\",\n    \"tipo\": \"AUTORIDADE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/cliente/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"cliente",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Carga",
+			"item": [
+				{
+					"name": "Criar uma Carga",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "asd123f",
+								"description": "Token agente",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_viagem\": \"3\",\n    \"quantidade_carga\": \"100\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/carga/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carga",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista de todas as cargas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/carga",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carga"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get uma carga",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:2000/carga/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"carga",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

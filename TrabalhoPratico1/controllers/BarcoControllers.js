@@ -2,10 +2,7 @@ const {
   getAllBarco,
   getOne,
 } = require('../provider/BarcoProvider')
-const {
-  isAgent,
-  getClientIDFromToken,
-} = require('../provider/ClienteProvider')
+
 // const Client = require('../models/Cliente')
 
 const getAllClientBarco = async (req, res) => {

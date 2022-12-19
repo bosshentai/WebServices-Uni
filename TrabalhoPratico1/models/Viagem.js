@@ -15,10 +15,22 @@ class Viagem extends Model {
         hora_partida: {
           type: DataTypes.DATE,
           allowNull: false,
+          validate: {
+            isDate: {
+              args: true,
+              msg: 'Data Invalido',
+            },
+          },
         },
         hora_chegada: {
           type: DataTypes.DATE,
           allowNull: false,
+          validate: {
+            isDate: {
+              args: true,
+              msg: 'Data Invalido',
+            },
+          },
         },
       },
       {
@@ -30,7 +42,7 @@ class Viagem extends Model {
 
   static associate(models) {
     this.belongsTo(models.Barco, {
-      foreignKe: 'imo',
+      foreignKey: 'imo',
       as: 'barco',
     })
   }

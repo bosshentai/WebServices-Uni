@@ -4,10 +4,6 @@ class Barco extends Model {
   static init(connection) {
     super.init(
       {
-        // imo:{
-        //   type: DataTypes.INTEGER,
-        //   allowNull: false
-        // },
         name: {
           type: DataTypes.STRING,
           allowNull: false,
