@@ -6,8 +6,8 @@ const postCliente = async(req,res) =>{
 
   try {
 
-    console.log('Controller Name: ' + name);
-    console.log("Controller Tipo: " + tipo);
+    // console.log('Controller Name: ' + name);
+    // console.log("Controller Tipo: " + tipo);
 
     const newCliente = await createCliente(
       name,tipo

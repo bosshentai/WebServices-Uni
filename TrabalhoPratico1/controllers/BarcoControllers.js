@@ -61,7 +61,12 @@ const getOneBarco = async (req, res) => {
   }
 }
 
-const postBarco = async (req, res) => {}
+const postBarco = async (req, res) => {
+  const {name, id_cliente} = req.body
+
+
+
+}
 
 module.exports = {
   getAllClientBarco,
