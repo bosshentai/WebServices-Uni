@@ -20,3 +20,10 @@ nanoid
 Schema
 -Tipos  
 -Query
+
+
+Resolver e ma mistura com controller e routers
+
+
+Input
+ com uma variavel com ! e obrigatorio

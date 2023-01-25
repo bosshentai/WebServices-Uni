@@ -14,7 +14,7 @@ type Disciplina{
   nome: String
   horas: Int
   sinopse: String
-  docente: Docente
+  docente: String
 }
 
 type Docente{
@@ -25,7 +25,7 @@ type Docente{
 }
 
   enum Grau{
-    licenciatura
+    Licenciatura
     Mestrado
     Doutoramento
   }
@@ -33,9 +33,30 @@ type Docente{
 
   type Query {
     getCurso(codigo: ID) : Curso
+  }
+
+  input CursoInput {
+    codigo: ID
+    nome: String!
+    grau: Grau!
+    ano: Int
+    disciplinas: [DisciplinaInput]
 
   }
 
+  input DisciplinaInput {
+    sigla: String!
+    nome: String!
+    horas: Int
+    sinopse: String
+    docente: String!
+  }
+
+  type Mutation {
+    criarCurso(input: CursoInput): Curso
+  }
 
 
 `)
+
+export default schema

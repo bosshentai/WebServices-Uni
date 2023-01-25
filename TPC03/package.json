@@ -1,24 +1,24 @@
 {
-  "name": "tp02",
+  "name": "tpc03",
   "version": "1.0.0",
-  "description": "Introd GraphQL",
+  "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon index.js"
   },
-  "keywords": [],
-  "author": "Hernani Baptista",
+  "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "nodemon": "^2.0.20"
-  },
   "dependencies": {
     "express": "^4.18.2",
     "express-graphql": "^0.12.0",
     "graphql": "^16.6.0",
-    "mongoose": "^6.8.3",
+    "mongoose": "^6.8.4",
     "nanoid": "^4.0.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.3",
+    "nodemon": "^2.0.20"
   }
 }
