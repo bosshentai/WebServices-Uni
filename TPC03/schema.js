@@ -10,12 +10,15 @@ import {
 } from 'graphql'
 // import { Cursor } from 'mongoose'
 import { Curso } from './models/curso.js'
+import { Docente } from './models/docente.js'
+import { Disciplina } from './models/disciplina.js'
+import { CursoDisciplina } from './models/cursoDisciplina.js'
 
 // Tipo Docente  ??? input type
 const TypeDocente = new GraphQLObjectType({
   name: 'Docente',
   fields: () => ({
-    codigo: { type: GraphQLID },
+    id: { type: GraphQLID },
     sigla: { type: GraphQLString },
     nome: { type: GraphQLString },
     // apelido: { type: GraphQLString },
@@ -37,6 +40,7 @@ const TypeCurso = new GraphQLObjectType({
 const TypeDisciplina = new GraphQLObjectType({
   name: 'Disciplina',
   fields: () => ({
+    // id: {type: GraphQLID},
     sigla: { type: GraphQLString },
     nome: { type: GraphQLString },
     horas: { type: GraphQLInt },
@@ -48,6 +52,31 @@ const TypeDisciplina = new GraphQLObjectType({
       },
     },
   }),
+})
+
+const TypeCursoDisciplina = new GraphQLObjectType({
+  name: 'CursoDisciplina',
+  fields: () => ({
+    curso: {
+      type: TypeCurso,
+      async resolve(parent, args) {
+        return await Curso.findById(parent.cursoId)
+      },
+    },
+    disciplina: {
+      type: TypeDisciplina,
+      async resolve(parent, args) {
+        return await Disciplina.findById(
+          parent.disciplinaId
+        )
+      },
+    },
+  }),
+
+  // curso:{type: TypeCurso },
+  // resolve(parent,args){
+  //   return
+  // }
 })
 
 const TypeGrau = new GraphQLEnumType({
@@ -74,10 +103,9 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     cursos: {
       type: new GraphQLList(TypeCurso),
-     async resolve(parent, args) {
-      const cursos = await Curso.find();
-        // Curso.find()
-        // return curso.find()
+      async resolve(parent, args) {
+        const cursos = await Curso.find()
+
         return cursos
       },
     },
@@ -86,22 +114,42 @@ const RootQuery = new GraphQLObjectType({
       args: { codigo: { type: GraphQLID } },
       async resolve(parent, args) {
         // return await Curso.findById(args.codigo)
-        return await Curso.findOne({codigo: args.codigo})
+        return await Curso.findOne({ codigo: args.codigo })
       },
     },
     docentes: {
       type: new GraphQLList(TypeDocente),
       resolve(parent, args) {
-        Docente.find()
+        return Docente.find()
       },
     },
     docente: {
       type: TypeDocente,
-      args: { codigo: { type: GraphQLID } },
+      args: { id: { type: GraphQLID } },
       resolve(parent, args) {
-        return Docente.findById(args.codigo)
+        return Docente.findById(args.id)
       },
     },
+
+    disciplina: {
+      type: TypeDisciplina,
+      args: { id: { type: GraphQLID } },
+      async resolve(parent, args) {
+        return await Disciplina.findById(args.id )
+      },
+    },
+
+    disciplinas: {
+      type: new GraphQLList(TypeDisciplina),
+      async resolve(parent, args) {
+        return await Disciplina.find()
+      },
+    },
+    // disciplinasById:{
+    //   type: new GraphQLList(TypeDisciplina),
+    //   args: {},
+
+    // }
   },
 })
 
@@ -118,21 +166,13 @@ const TypeMutation = new GraphQLObjectType({
         ano: { type: new GraphQLNonNull(GraphQLInt) },
       },
       resolve(parent, args) {
-        // let newCurso = {
-        //   codigo: args.input.codigo,
-        //   nome: args.input.nome,
-        //   grau: args.input.grau,
-        //   ano: args.input.anos
-        // }
-        // cursos.push(newCurso)
-        // return cursos
-
         const curso = new Curso({
           codigo: args.codigo,
           nome: args.nome,
           grau: args.grau,
-          // grau: args.gra
           ano: args.ano,
+          createAt: new Date(),
+          updateAt: new Date(),
         })
         return curso.save()
       },
@@ -141,33 +181,132 @@ const TypeMutation = new GraphQLObjectType({
     updateCurso: {
       type: TypeCurso,
       args: {
-        // id:{type: new GraphQLNonNull(GraphQLID)}
         codigo: { type: new GraphQLNonNull(GraphQLID) },
         nome: { type: GraphQLString },
         grau: { type: TypeGrau },
         ano: { type: GraphQLInt },
       },
-      resolve(parent, args) {
-        return Cursos.findByIdAndUpdate(
-          args.codigo,
+      async resolve(parent, args) {
+        const updateCurso = await Curso.findOneAndUpdate(
+          { codigo: args.codigo },
           {
-            $set: {
-              nome: args.nome,
-              grau: args.grau,
-              ano: args.ano,
-            },
+            nome: args.nome,
+            grau: args.grau,
+            ano: args.ano,
+            updateAt: new Date(),
           },
           { new: true },
         )
+        return updateCurso
       },
     },
 
     removeCurso: {
       type: TypeCurso,
       args: { codigo: { type: GraphQLID } },
+      async resolve(parent, args) {
+        const curso = await Curso.findOneAndDelete({
+          codigo: args.codigo,
+        })
+        return curso
+      },
+    },
+
+    addDocente: {
+      type: TypeDocente,
+      args: {
+        sigla: { type: new GraphQLNonNull(GraphQLString) },
+        nome: { type: new GraphQLNonNull(GraphQLString) },
+        email: { type: new GraphQLNonNull(GraphQLString) },
+      },
       resolve(parent, args) {
-        // _.remove(cursos,(b)=>{b.codigo === args.codigo})
-        // return cursos
+        const docente = new Docente({
+          sigla: args.sigla,
+          nome: args.nome,
+          email: args.email,
+          createAt: new Date(),
+          updateAt: new Date(),
+        })
+        return docente.save()
+      },
+    },
+
+    updateDocente: {
+      type: TypeDocente,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+        sigla: { type: GraphQLString },
+        nome: { type: GraphQLString },
+        email: { type: GraphQLString },
+      },
+      async resolve(parent, args) {
+        const update = await Docente.findByIdAndUpdate(
+          { id: args.id },
+          {
+            sigla: args.sigla,
+            nome: args.nome,
+            ano: args.email,
+            updateAt: new Date(),
+          },
+          { new: true },
+        )
+
+        return updateDocente
+      },
+    },
+
+    removeDocente: {
+      type: TypeDocente,
+      args: { id: { type: GraphQLID } },
+      async resolve(parent, args) {
+        const deleteDocente =
+          await Docente.findByIdAndDelete({
+            id: args.id,
+          })
+        return deleteDocente
+      },
+    },
+
+    addDisciplina: {
+      type: TypeDisciplina,
+      args: {
+        sigla: { type: new GraphQLNonNull(GraphQLString) },
+        nome: { type: new GraphQLNonNull(GraphQLString) },
+        horas: { type: new GraphQLNonNull(GraphQLInt) },
+        sinopse: {
+          type: new GraphQLNonNull(GraphQLString),
+        },
+        docenteId: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        const newDisciplina = new Disciplina({
+          sigla: args.sigla,
+          nome: args.nome,
+          horas: args.horas,
+          sinopse: args.sinopse,
+          docenteId: args.docenteId,
+          createAt: new Date(),
+          updateAt: new Date(),
+        })
+
+        return newDisciplina.save()
+      },
+    },
+    addCursoDisciplina: {
+      type: TypeCursoDisciplina,
+      args: {
+        cursoId: { type: new GraphQLNonNull(GraphQLID) },
+        disciplinaId: {
+          type: new GraphQLNonNull(GraphQLID),
+        },
+      },
+       resolve(parent, args) {
+        const newCursoDisciplina = new CursoDisciplina({
+          cursoId: args.cursoId,
+          disciplinaId: args.disciplinaId,
+          createAt: new Date(),
+        })
+        return newCursoDisciplina.save()
       },
     },
   },
@@ -177,10 +316,3 @@ export const schema = new GraphQLSchema({
   query: RootQuery,
   mutation: TypeMutation,
 })
-
-// module.exports = {schema}
-// grau
-
-// Licenciatura
-// Mestrado
-// Doutoramento

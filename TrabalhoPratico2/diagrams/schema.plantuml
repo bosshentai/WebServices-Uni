@@ -1,0 +1,52 @@
+@startuml ERDiagram
+
+
+hide circle
+
+entity "organization" as or  {
+
+  id: string
+  name: string
+  description: string
+  createAt : date
+
+}
+
+
+entity "events" as ev {
+
+  id : string
+  organizationId: string
+ name : string
+ description: string
+ day: date
+ startTime: Time
+ endTime: Time
+ location: string
+ createAt: date
+ updateAt: date
+}
+
+
+entity "sellTicket" as  st{
+
+  id: string
+  eventoId: string
+  createAt: date
+
+}
+
+
+
+
+
+or }|--o{ ev
+ev }o--|{ st
+
+
+
+
+
+
+
+@enduml
