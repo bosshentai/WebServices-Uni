@@ -17,7 +17,7 @@ import mongoose from 'mongoose'
 const TypeOrganization = new GraphQLObjectType({
   name: 'Organization',
   fields: {
-    // id: {type: GraphQLID},
+    id: { type: GraphQLID },
     name: { type: GraphQLString },
     description: { type: GraphQLString },
   },
@@ -47,6 +47,12 @@ const TypeTicket = new GraphQLObjectType({
   name: 'ticket',
   fields: {
     id: { type: GraphQLID },
+    eventId: {
+      type: TypeEvent,
+      resolve(parent, args) {
+        return Event.findById(parent.eventId)
+      },
+    },
   },
 })
 
@@ -71,7 +77,9 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       async resolve(parent, args) {
         // return await Event.find({ organizationId:  args.id })
-        return await Event.find({ organizationId: mongoose.Types.ObjectId(args.id) })
+        return await Event.find({
+          organizationId: mongoose.Types.ObjectId(args.id),
+        })
       },
     },
 
@@ -117,13 +125,44 @@ const TypeMutation = new GraphQLObjectType({
         name: { type: new GraphQLNonNull(GraphQLString) },
         description: { type: GraphQLString },
       },
-      resolve(parent, args) {
+      async resolve(parent, args) {
         const newOrganization = new Organization({
           name: args.name,
           description: args.description,
           createAt: new Date(),
         })
-        return newOrganization.save()
+        return await newOrganization.save()
+      },
+    },
+
+    updateOrganization: {
+      type: TypeOrganization,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLString) },
+        name: { type: GraphQLString },
+        description: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        const update = Organization.findByIdAndUpdate(
+          args.id,
+          {
+            name: args.name,
+            description: args.description,
+          },
+          { new: true },
+        )
+
+        return update
+      },
+    },
+
+    deleteOrganization: {
+      type: TypeOrganization,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(parent,args) {
+        return Organization.findByIdAndRemove(args.id)
       },
     },
 
@@ -173,9 +212,7 @@ const TypeMutation = new GraphQLObjectType({
       },
       async resolve(parent, args) {
         const update = await Event.findByIdAndUpdate(
-          {
-            id: args.id,
-          },
+             args.id,
           {
             name: args.name,
             date: args.date,
@@ -190,13 +227,38 @@ const TypeMutation = new GraphQLObjectType({
       },
     },
 
+    deleteEvent: {
+      type: TypeEvent,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(parent, args) {
+        return await Event.findByIdAndRemove(args.id)
+      },
+    },
+
     createTicket: {
       type: TypeTicket,
+      args: {
+        eventId: { type: new GraphQLNonNull(GraphQLID) },
+      },
+
       resolve(parent, args) {
         const newTicket = new Ticket({
+          eventId: args.eventId,
           createAt: new Date(),
         })
-        return newTicket
+        return newTicket.save()
+      },
+    },
+
+    deleteTicket: {
+      type: TypeTicket,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(parent, args) {
+        return await Ticket.findByIdAndRemove(args.id)
       },
     },
   },
